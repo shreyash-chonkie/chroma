@@ -25,7 +25,7 @@ runs:
         product: kind
         registry: ctlptl-registry
         registryAuths:
-        - endpoint: http://192.168.127.1:5000
+        - endpoint: http://192.168.127.1:5009
         EOF
     - name: Start Tilt
       shell: bash
