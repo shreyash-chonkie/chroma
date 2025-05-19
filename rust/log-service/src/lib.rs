@@ -203,7 +203,6 @@ async fn get_log_from_handle<'a>(
             _phantom: std::marker::PhantomData,
         });
     }
-    tracing::info!("Opening log at {}", prefix);
     let opened = LogWriter::open(
         options.clone(),
         Arc::clone(storage),
@@ -641,6 +640,7 @@ pub struct LogServer {
 }
 
 impl LogServer {
+    #[tracing::instrument(skip(self, proxy))]
     async fn effectuate_log_transfer(
         &self,
         collection_id: CollectionUuid,
@@ -731,6 +731,7 @@ impl LogServer {
         })
     }
 
+    #[tracing::instrument(skip(self, request))]
     async fn forward_push_logs(
         &self,
         collection_id: CollectionUuid,
@@ -755,6 +756,7 @@ impl LogServer {
         }
     }
 
+    #[tracing::instrument(skip(self, request))]
     async fn forward_scout_logs(
         &self,
         request: Request<ScoutLogsRequest>,
@@ -766,6 +768,7 @@ impl LogServer {
         }
     }
 
+    #[tracing::instrument(skip(self, request))]
     async fn forward_pull_logs(
         &self,
         request: Request<PullLogsRequest>,
@@ -777,6 +780,7 @@ impl LogServer {
         }
     }
 
+    #[tracing::instrument(skip(self, request))]
     async fn forward_update_collection_log_offset(
         &self,
         request: Request<UpdateCollectionLogOffsetRequest>,
@@ -788,6 +792,7 @@ impl LogServer {
         }
     }
 
+    #[tracing::instrument(skip(self, request))]
     async fn forward_fork_logs(
         &self,
         request: Request<ForkLogsRequest>,
